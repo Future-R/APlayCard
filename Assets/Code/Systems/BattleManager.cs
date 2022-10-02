@@ -69,11 +69,23 @@ public class BattleManager : MonoBehaviour
     public void CreateCard(ref List<Card> cards, Card.CardColor color, byte num, Player owner = null)
     {
         string cardName = $"{color}-{num}";
-        GameObject cardInstance = new GameObject(cardName, typeof(Card));
-        cardInstance.transform.SetParent(cardsParentNode.transform);
+        GameObject cardInstance = (GameObject)Instantiate(Resources.Load("P_Card_Classic"), cardsParentNode.transform);
+
+
         Card card = cardInstance.GetComponent<Card>();
         card.Init(color, num);
-        card.owner = owner;
+        if (owner)
+        {
+            card.owner = owner;
+            if (battleField.OBPlayer == owner)
+            {
+                cardInstance.transform.SetParent(owner.GetComponent<PlayerViewer>().DeckLayoutCenter.transform);
+                //cardInstance.GetComponent<CardShow>().TurnCover();
+                cardInstance.GetComponent<CardShow>().Draw();
+            }
+        }
+        card.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+
         cards.Add(card);
     }
 
@@ -81,14 +93,19 @@ public class BattleManager : MonoBehaviour
     {
         if (battleField.activePlayer.Deck.Count < 8)
         {
-
+            // 如果当前行动玩家无牌可抓，且当前行动玩家非自己，那么显示自己（非行动玩家）胜利
+            string reason = battleField.activePlayer != battleField.OBPlayer ? GameTips.WinReason.对手无牌可抓.ToString() : GameTips.LoseReason.你无牌可抓.ToString();
+            this.TriggerEvent(GameEvents.PlayerWinMatch, new PlayerWinMatchEventArgs { winner = battleField.nonactivePlayer, reason = reason });
         }
         else if (battleField.nonactivePlayer.Deck.Count < 8)
         {
-
+            string reason = battleField.nonactivePlayer != battleField.OBPlayer ? GameTips.WinReason.对手无牌可抓.ToString() : GameTips.LoseReason.你无牌可抓.ToString();
+            this.TriggerEvent(GameEvents.PlayerWinMatch, new PlayerWinMatchEventArgs { winner = battleField.activePlayer, reason = reason });
         }
         GameHelper.DrawCards(ref battleField.activePlayer.Deck, ref battleField.activePlayer.Hand, 8);
+        this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = battleField.activePlayer });
         GameHelper.DrawCards(ref battleField.nonactivePlayer.Deck, ref battleField.nonactivePlayer.Hand, 8);
+        this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = battleField.nonactivePlayer });
     }
 
     public int CalculateScore(Player player)

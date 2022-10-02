@@ -54,6 +54,8 @@ public class Player : MonoBehaviour
 
             GameHelper.DrawCards(ref Deck, ref Hand, 1);
             Debug.Log($"抽到了{Hand.Last()}");
+
+            this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
             return true;
         }
         else
@@ -73,6 +75,7 @@ public class Player : MonoBehaviour
         Hand.Remove(card);
         Debug.Log($"弃置了{card}");
 
+        this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
         return true;
     }
 
@@ -87,6 +90,8 @@ public class Player : MonoBehaviour
         targetZone.cards.Add(card);
         Hand.Remove(card);
         Debug.Log($"打出了{card}");
+
+        this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
         return true;
     }
 }
