@@ -11,14 +11,22 @@ public class PlayerViewer : MonoBehaviour
     public GameObject HandCircleLayoutCenter;
     public GameObject DeckLayoutCenter;
     public GameObject GraveyardLayoutCenter;
+
+    public GameObject OppHandLineLayoutCenter;
+    public GameObject OppHandCircleLayoutCenter;
+    public GameObject OppDeckLayoutCenter;
+    public GameObject OppGraveyardLayoutCenter;
+
     public GameObject RedZoneLayoutCenter;
     public GameObject GreenZoneHandLayoutCenter;
     public GameObject BlueZoneDeckLayoutCenter;
 
     public float lineLayoutXOffset = 20f;
-    public float circleLayoutLeftAngle = 105f;
-    public float circleLayoutRightAngle = 75f;
-    public float circleLayoutRadius = 10f;
+
+    public float circleLayoutAngle = 60f;
+    //public float circleLayoutLeftAngle = 105f;
+    //public float circleLayoutRightAngle = 75f;
+    public float circleLayoutRadius = 100f;
     public float damp = 20f;
     private Player player;
     // Start is called before the first frame update
@@ -49,10 +57,10 @@ public class PlayerViewer : MonoBehaviour
         {
             return;
         }
-        // Èç¹ûÊÖÅÆÊıÁ¿Ğ¡ÓÚ4£¬Ö±Ïß²¼¾Ö
+        // å¦‚æœæ‰‹ç‰Œæ•°é‡å°äº4ï¼Œç›´çº¿å¸ƒå±€
         if (playerHandsCount < 4)
         {
-            // ¼ÆËãµÚÒ»ÕÅÅÆµÄXÆ«ÒÆÖµ
+            // è®¡ç®—ç¬¬ä¸€å¼ ç‰Œçš„Xåç§»å€¼
             float cardXOffset = (1 - playerHandsCount) * 0.5f * lineLayoutXOffset;
             for (int i = 0; i < playerHandsCount; i++)
             {
@@ -64,16 +72,19 @@ public class PlayerViewer : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"ÕÒ²»µ½{player.Hand[i]}µÄCardMove×é¼ş£¡");
+                    Debug.LogWarning($"æ‰¾ä¸åˆ°{player.Hand[i]}çš„CardMoveç»„ä»¶ï¼");
                 }
                 cardXOffset += lineLayoutXOffset;
             }
         }
-        // ·ñÔòÇúÏß²¼¾Ö
+        // å¦åˆ™æ›²çº¿å¸ƒå±€
         else
         {
-            float startAngle = Mathf.PI * circleLayoutLeftAngle / 180f;
-            float endAngle = Mathf.PI * circleLayoutRightAngle / 180f;
+            float midAngle = 90f;
+            // è®¡ç®—ç‰Œä¹‹é—´çš„è§’åº¦é—´éš”ï¼ˆè¾¹ç•Œä¸æ”¾ç‰Œæ‰€ä»¥+1ä¸æ˜¯-1ï¼‰
+            float perAngle = circleLayoutAngle / (playerHandsCount + 1);
+            // è®¡ç®—ç¬¬ä¸€å¼ ç‰Œçš„è§’åº¦
+            float currentAngle = midAngle + (1 - playerHandsCount) * 0.5f * perAngle;
 
             for (int i = 0; i < playerHandsCount; i++)
             {
@@ -81,15 +92,18 @@ public class PlayerViewer : MonoBehaviour
                 if (cardMove)
                 {
                     cardMove.transform.SetParent(HandCircleLayoutCenter.transform);
-
-                    float angle = Mathf.Lerp(startAngle, endAngle, i / (playerHandsCount - 1));
-                    cardMove.targetTransform = new Vector3(Mathf.Cos(angle) * circleLayoutRadius, Mathf.Sin(angle) * circleLayoutRadius - circleLayoutRadius, 1f);
-                    cardMove.gameObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(15f, -15f, i / (playerHandsCount - 1)));
+                    cardMove.targetTransform = new Vector3(
+                        Mathf.Cos(currentAngle * Mathf.PI / 180) * circleLayoutRadius,
+                        Mathf.Sin(currentAngle * Mathf.PI / 180) * circleLayoutRadius,
+                        1f
+                        );
+                    cardMove.gameObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0f, 0f, currentAngle - midAngle);
                 }
                 else
                 {
-                    Debug.LogWarning($"ÕÒ²»µ½{player.Hand[i]}µÄCardMove×é¼ş£¡");
+                    Debug.LogWarning($"æ‰¾ä¸åˆ°{player.Hand[i]}çš„CardMoveç»„ä»¶ï¼");
                 }
+                currentAngle += perAngle;
             }
         }
     }

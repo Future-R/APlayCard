@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ba6fbdddc16d5469eca973921af8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0, z: 0}
+  targetTransform: {x: 0, y: 0, z: 0}
 --- !u!114 &5312544149417846532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +462,7 @@ MonoBehaviour:
   B: {fileID: 8610800174806988592}
   PointForward: {fileID: 8637386710572083081}
   PointBackward: {fileID: 6530177459626516662}
+  showStatus: 3
 --- !u!1 &6530177459626516662
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,8 +530,8 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 54
-    m_FontStyle: 1
+    m_FontSize: 52
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 54
