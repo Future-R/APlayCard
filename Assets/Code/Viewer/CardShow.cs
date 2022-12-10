@@ -18,14 +18,14 @@ public class CardShow : MonoBehaviour
 
     private Card card;
 
-    public ShowStatus showStatus = ShowStatus.Òş²Ø;
+    public ShowStatus showStatus = ShowStatus.éšè—;
 
     public enum ShowStatus
     {
-        ¹«¿ª¿É¼û,
-        ½ö×Ô¼º¿É¼û,
-        ²»¿É¼û,
-        Òş²Ø
+        å…¬å¼€å¯è§,
+        ä»…è‡ªå·±å¯è§,
+        ä¸å¯è§,
+        éšè—
     }
 
     // Start is called before the first frame update
@@ -48,7 +48,7 @@ public class CardShow : MonoBehaviour
         CardBack.SetActive(true);
     }
 
-    public void Draw()
+    public void Show()
     {
         card = GetComponent<Card>();
         Hide();
@@ -63,13 +63,13 @@ public class CardShow : MonoBehaviour
 
         switch (card.colors.FirstOrDefault())
         {
-            case Card.CardColor.ºì:
+            case Card.CardColor.çº¢:
                 R.SetActive(true);
                 break;
-            case Card.CardColor.ÂÌ:
+            case Card.CardColor.ç»¿:
                 G.SetActive(true);
                 break;
-            case Card.CardColor.À¶:
+            case Card.CardColor.è“:
                 B.SetActive(true);
                 break;
             default:

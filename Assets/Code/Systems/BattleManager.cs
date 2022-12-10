@@ -81,7 +81,7 @@ public class BattleManager : MonoBehaviour
             {
                 cardInstance.transform.SetParent(owner.GetComponent<PlayerViewer>().DeckLayoutCenter.transform);
                 //cardInstance.GetComponent<CardShow>().TurnCover();
-                cardInstance.GetComponent<CardShow>().Draw();
+                cardInstance.GetComponent<CardShow>().Show();
             }
         }
         card.transform.localScale = new Vector3(0.5f, 0.5f, 1);

@@ -14,38 +14,39 @@ public static class GameEvents
     public const string PlayerWinMatch = nameof(PlayerWinMatch);
     public const string ContorllerCoolDown = nameof(ContorllerCoolDown);
     public const string HandsChange = nameof(HandsChange);
+    public const string PlayCard = nameof(PlayCard);
     //public const string ZoneCardsCountChange = nameof(ZoneCardsCountChange);
 }
 
 /// <summary>
-/// Íæ¼Òµã»÷
+/// ç©å®¶ç‚¹å‡»
 /// </summary>
 public class PlayerTouchEventArgs : EventArgs
 {
     /// <summary>
-    /// Íæ¼Ò
+    /// ç©å®¶
     /// </summary>
     public Player activePlayer;
 }
 
 /// <summary>
-/// ĞĞ¶¯¿ªÊ¼
+/// è¡ŒåŠ¨å¼€å§‹
 /// </summary>
 public class ActionPhaseEventArgs : EventArgs
 {
     /// <summary>
-    /// Íæ¼Ò
+    /// ç©å®¶
     /// </summary>
     public Player activePlayer;
 }
 
 /// <summary>
-/// ĞĞ¶¯£¨³öÅÆ/ÆúÅÆ/¹ºÅÆ£©½áÊø
+/// è¡ŒåŠ¨ï¼ˆå‡ºç‰Œ/å¼ƒç‰Œ/è´­ç‰Œï¼‰ç»“æŸ
 /// </summary>
 public class ActionEndEventArgs : EventArgs
 {
     /// <summary>
-    /// Íæ¼Ò
+    /// ç©å®¶
     /// </summary>
     public Player currentPlayer;
 }
@@ -63,7 +64,7 @@ public class RoundStartEventArgs : EventArgs
 public class PlayerWinGameEventArgs : EventArgs
 {
     /// <summary>
-    /// Íæ¼Ò
+    /// ç©å®¶
     /// </summary>
     public Player currentPlayer;
 }
@@ -71,7 +72,7 @@ public class PlayerWinGameEventArgs : EventArgs
 public class PlayerWinMatchEventArgs : EventArgs
 {
     /// <summary>
-    /// Íæ¼Ò
+    /// ç©å®¶
     /// </summary>
     public Player winner;
     public string reason;
@@ -80,18 +81,34 @@ public class PlayerWinMatchEventArgs : EventArgs
 public class ContorllerCoolDownEventArgs : EventArgs
 {
     /// <summary>
-    /// Íæ¼Ò
+    /// ç©å®¶
     /// </summary>
     public Player currentPlayer;
     /// <summary>
-    /// µÈ´ıÔ­Òò
+    /// ç­‰å¾…åŸå› 
     /// </summary>
     public string reason;
 }
 public class HandsChangeEventArgs : EventArgs
 {
     /// <summary>
-    /// Íæ¼Ò
+    /// ç©å®¶
     /// </summary>
     public Player currentPlayer;
+}
+
+public class PlayCard : EventArgs
+{
+    /// <summary>
+    /// ç©å®¶
+    /// </summary>
+    public Player player;
+    /// <summary>
+    /// å¡ç‰Œ
+    /// </summary>
+    public Card card;
+    /// <summary>
+    /// ç›®æ ‡åŒºåŸŸ
+    /// </summary>
+    public BattleField.Zone targetZone;
 }

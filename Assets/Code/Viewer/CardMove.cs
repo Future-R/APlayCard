@@ -5,11 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Card))]
 public class CardMove : MonoBehaviour
 {
-    public Vector3 targetTransform;
+    public Vector3 targetPosition;
 
-    public void ChangeZone(GameObject newParent,Vector3 targetVector)
+    public void ChangeZone(GameObject newParent, Vector3 targetVector)
     {
         gameObject.transform.SetParent(newParent.transform);
-        targetTransform = targetVector;
+        targetPosition = targetVector;
+        transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        transform.localPosition = targetVector;
+        transform.localRotation = Quaternion.identity;
     }
 }

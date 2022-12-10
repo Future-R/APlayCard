@@ -8,6 +8,12 @@ public static class CardFilter
 {
     public static BattleField BF;
 
+    /// <summary>
+    /// 从玩家手牌中检查有哪些牌可打出
+    /// </summary>
+    /// <param name="cardColor"></param>
+    /// <param name="AP"></param>
+    /// <returns></returns>
     public static List<Card> UsableCards(Player AP)
     {
         List<Card> usableCards = new List<Card>();
@@ -26,12 +32,18 @@ public static class CardFilter
         return usableCards;
     }
 
-    public static List<Card> UsableCardsToZone(Card.CardColor cardColor,Player AP)
+    /// <summary>
+    /// 从卡牌列表中检查有哪些牌可打出到指定区域
+    /// </summary>
+    /// <param name="cards"></param>
+    /// <param name="targetZone"></param>
+    /// <param name="currentPlayer"></param>
+    /// <returns></returns>
+    public static List<Card> UsableCardsToZone(List<Card> cards, Zone targetZone, Player currentPlayer)
     {
         List<Card> result = new List<Card>();
-        Zone targetZone = BF.FindZoneByColor(cardColor);
         int popPoint = targetZone.GetPopPoint();
-        result.AddRange(AP.Hand.Where(c => c.points > popPoint));
+        result.AddRange(cards.Where(c => c.colors.Contains(targetZone.color) && c.points > popPoint));
         return result;
     }
 

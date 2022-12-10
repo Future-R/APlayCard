@@ -29,6 +29,7 @@ public class AIPlayer : MonoBehaviour
             return;
         }
         Debug.Log($"轮到{self.NickName}#{self.AccountID}行动！");
+        // 筛选当前玩家手中的可用卡牌
         List<Card> useableCards = CardFilter.UsableCards(self);
         if (useableCards.Count == 0)
         {
@@ -48,7 +49,7 @@ public class AIPlayer : MonoBehaviour
 
         }
         // 如果只有1张牌，肯定出这张。如果这张牌能打到多个区域，则找牌堆顶最小的打。
-        if (useableCards.Count == 1)
+        else if (useableCards.Count == 1)
         {
             Card shouldPlayCard = useableCards[0];
             List<Zone> canPlayZones = ZoneFilter.CheckCanPlayZones(shouldPlayCard);
@@ -63,15 +64,18 @@ public class AIPlayer : MonoBehaviour
         // 最小的点数相同时，牌堆顶最小的出
         else
         {
+            // 筛选可用卡牌中点数最小的（可能不止一张）
             List<Card> minOfHands = useableCards.Where(c => c.points == useableCards.Min(c => c.points)).ToList();
             List<Zone> canPlayZones = new List<Zone>();
             foreach (var card in minOfHands)
             {
+                // 将那些点数最小的卡牌能打出的区域都纳入统计
                 canPlayZones.AddRange(ZoneFilter.CheckCanPlayZones(card));
             }
-            Zone shouldPlayZone = canPlayZones.OrderBy(z => z.cards.Count != 0 ? z.cards.Last().points : GameHelper.nonExist).FirstOrDefault();
-            Card shouldPlayCard = GameHelper.SelectOne(CardFilter.UsableCardsToZone(shouldPlayZone.color, self));
-
+            // 将能打出的区域按牌堆顶的点数大小进行排序，无卡牌时以-2计算，最后取牌堆顶最小的区域作为目标区域
+            Zone shouldPlayZone = canPlayZones.OrderBy(z => z.GetPopPoint()).FirstOrDefault();
+            Card shouldPlayCard = GameHelper.SelectOne(CardFilter.UsableCardsToZone(minOfHands, shouldPlayZone, self));
+            
             self.PlayCard(shouldPlayCard, ref shouldPlayZone);
             return;
         }

@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Æú2×¥1
+    /// å¼ƒ2æŠ“1
     /// </summary>
     /// <param name="cardA"></param>
     /// <param name="cardB"></param>
@@ -46,14 +46,14 @@ public class Player : MonoBehaviour
         {
             Graveyard.Add(cardA);
             Hand.Remove(cardA);
-            Debug.Log($"ÆúÖÃÁË{cardA}");
+            Debug.Log($"å¼ƒç½®äº†{cardA}");
 
             Graveyard.Add(cardB);
             Hand.Remove(cardB);
-            Debug.Log($"ÆúÖÃÁË{cardB}");
+            Debug.Log($"å¼ƒç½®äº†{cardB}");
 
             GameHelper.DrawCards(ref Deck, ref Hand, 1);
-            Debug.Log($"³éµ½ÁË{Hand.Last()}");
+            Debug.Log($"æŠ½åˆ°äº†{Hand.Last()}");
 
             this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
             return true;
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// ¶ªÆú1ÕÅÊÖÅÆ
+    /// ä¸¢å¼ƒ1å¼ æ‰‹ç‰Œ
     /// </summary>
     /// <param name="card"></param>
     /// <returns></returns>
@@ -73,24 +73,26 @@ public class Player : MonoBehaviour
     {
         Graveyard.Add(card);
         Hand.Remove(card);
-        Debug.Log($"ÆúÖÃÁË{card}");
+        Debug.Log($"å¼ƒç½®äº†{card}");
 
         this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
         return true;
     }
 
     /// <summary>
-    /// ´ò³ö1ÕÅÊÖÅÆ
+    /// æ‰“å‡º1å¼ æ‰‹ç‰Œ
     /// </summary>
-    /// <param name="card">Òª³öµÄÅÆ</param>
-    /// <param name="targetZone">Ä¿±êÇøÓò</param>
-    /// <returns></returns>
-    public bool PlayCard(Card card,ref Zone targetZone)
+    /// <param name="card">è¦å‡ºçš„ç‰Œ</param>
+    /// <param name="targetZone">ç›®æ ‡åŒºåŸŸ</param>
+    /// <returns></returns> 
+    public bool PlayCard(Card card, ref Zone targetZone)
     {
         targetZone.cards.Add(card);
         Hand.Remove(card);
-        Debug.Log($"´ò³öÁË{card}");
 
+        Debug.Log($"æ‰“å‡ºäº†{card}");
+
+        this.TriggerEvent(GameEvents.PlayCard, new PlayCard { player = this, card = card, targetZone = targetZone });
         this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
         return true;
     }
