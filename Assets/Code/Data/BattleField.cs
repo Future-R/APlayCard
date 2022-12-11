@@ -13,11 +13,18 @@ public class BattleField : MonoBehaviour
     public Player nonactivePlayer;
 
     public int round;
+    /// <summary>
+    /// 需要显示界面的玩家
+    /// </summary>
     public Player OBPlayer;
 
     public Zone Zone_Red = new Zone();
     public Zone Zone_Green = new Zone();
     public Zone Zone_Blue = new Zone();
+    /// <summary>
+    /// 游戏中所有卡片的对象池
+    /// </summary>
+    public List<Card> cardObjectPool = new List<Card>();
 
 
     public class Zone

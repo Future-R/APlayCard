@@ -15,6 +15,7 @@ public static class GameEvents
     public const string ContorllerCoolDown = nameof(ContorllerCoolDown);
     public const string HandsChange = nameof(HandsChange);
     public const string PlayCard = nameof(PlayCard);
+    public const string Discard = nameof(Discard);
     //public const string ZoneCardsCountChange = nameof(ZoneCardsCountChange);
 }
 
@@ -111,4 +112,16 @@ public class PlayCard : EventArgs
     /// 目标区域
     /// </summary>
     public BattleField.Zone targetZone;
+}
+
+public class Discard : EventArgs
+{
+    /// <summary>
+    /// 玩家
+    /// </summary>
+    public Player player;
+    /// <summary>
+    /// 卡牌
+    /// </summary>
+    public Card card;
 }

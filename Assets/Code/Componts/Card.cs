@@ -31,4 +31,9 @@ public class Card : MonoBehaviour
         };
         points = setPoints;
     }
+
+    public void UpdateName()
+    {
+        gameObject.name = $"{string.Join("/", colors)}-{points}-{owner.NickName}";
+    }
 }

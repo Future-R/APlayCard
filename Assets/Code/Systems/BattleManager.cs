@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour
     BattleField battleField;
 
     public GameObject cardsParentNode;
+    public PlayerViewer playerViewer;
 
 
     void Start()
@@ -24,8 +25,10 @@ public class BattleManager : MonoBehaviour
         battleField.player1.GameInit();
         battleField.player2.GameInit();
 
-        // 导入卡组
+        // 导入牌组
         DebugImportDeck();
+        // 牌组位置更新
+
         // 洗牌
         GameHelper.Shuffle(ref battleField.player1.Deck);
         GameHelper.Shuffle(ref battleField.player2.Deck);
@@ -64,29 +67,41 @@ public class BattleManager : MonoBehaviour
         Card card = cardInstance.GetComponent<Card>();
         card.Init(colors, num);
         card.owner = owner;
+        card.UpdateName();
         cards.Add(card);
     }
     public void CreateCard(ref List<Card> cards, Card.CardColor color, byte num, Player owner = null)
     {
-        string cardName = $"{color}-{num}";
         GameObject cardInstance = (GameObject)Instantiate(Resources.Load("P_Card_Classic"), cardsParentNode.transform);
 
 
         Card card = cardInstance.GetComponent<Card>();
         card.Init(color, num);
+        card.owner = owner;
         if (owner)
         {
-            card.owner = owner;
+
             if (battleField.OBPlayer == owner)
             {
-                cardInstance.transform.SetParent(owner.GetComponent<PlayerViewer>().DeckLayoutCenter.transform);
+                card.transform.SetParent(playerViewer.DeckLayoutCenter.transform, false);
                 //cardInstance.GetComponent<CardShow>().TurnCover();
-                cardInstance.GetComponent<CardShow>().Show();
+                CardShow show = card.GetComponent<CardShow>();
+                show.TurnCover();
+                show.Show();
+            }
+            else
+            {
+                card.transform.SetParent(playerViewer.OppDeckLayoutCenter.transform, false);
+                CardShow show = card.GetComponent<CardShow>();
+                show.Show();
             }
         }
         card.transform.localScale = new Vector3(0.5f, 0.5f, 1);
-
+        
+        card.UpdateName();
         cards.Add(card);
+        // 加入卡片对象池
+        battleField.cardObjectPool.Add(card);
     }
 
     public void DrawStartingHands()

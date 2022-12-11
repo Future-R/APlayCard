@@ -12,7 +12,7 @@ public class CardMove : MonoBehaviour
         gameObject.transform.SetParent(newParent.transform);
         targetPosition = targetVector;
         transform.localScale = new Vector3(0.5f, 0.5f, 1f);
-        transform.localPosition = targetVector;
+        //transform.localPosition = targetVector;
         transform.localRotation = Quaternion.identity;
     }
 }

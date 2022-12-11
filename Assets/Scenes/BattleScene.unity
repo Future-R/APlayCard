@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -120, y: -250}
+  m_AnchoredPosition: {x: 120, y: -350}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &126792891
@@ -240,8 +240,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 1080, y: 400}
+  m_AnchoredPosition: {x: 0, y: -350}
+  m_SizeDelta: {x: 1080, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &550454957
 GameObject:
@@ -273,9 +273,9 @@ RectTransform:
   m_Father: {fileID: 1883673919}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -150, y: 300}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -150, y: -150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &710455850
@@ -310,9 +310,20 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -120, y: -50}
+  m_AnchoredPosition: {x: -120, y: -100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &762433584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7173161062228694577, guid: d9489ff00d4887c45a14c21a49bb2eed, type: 3}
+  m_PrefabInstance: {fileID: 7173161062432598408}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906dab4645daa7b48865a8c9bd4001e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &848952906 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5725674037302523178, guid: 7d317f6de4e42744a803e53f02cd85ef, type: 3}
@@ -360,6 +371,7 @@ MonoBehaviour:
   nonactivePlayer: {fileID: 0}
   round: 0
   OBPlayer: {fileID: 339443637}
+  cardObjectPool: []
 --- !u!4 &1023227235
 Transform:
   m_ObjectHideFlags: 0
@@ -387,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardsParentNode: {fileID: 2052177817}
+  playerViewer: {fileID: 762433584}
 --- !u!1 &1171784663
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,9 +430,9 @@ RectTransform:
   m_Father: {fileID: 494957622}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -150, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 150, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1211481517
@@ -590,7 +603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -120, y: -150}
+  m_AnchoredPosition: {x: 120, y: -150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1685856305
@@ -762,9 +775,9 @@ RectTransform:
   m_Father: {fileID: 494957622}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -150, y: 300}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: -150.00003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1818774743
@@ -921,8 +934,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 1080, y: 400}
+  m_AnchoredPosition: {x: 9.7095, y: 350}
+  m_SizeDelta: {x: 1080, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2052177817
 GameObject:
@@ -1018,6 +1031,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7173161062228694577, guid: d9489ff00d4887c45a14c21a49bb2eed, type: 3}
+      propertyPath: damp
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173161062228694577, guid: d9489ff00d4887c45a14c21a49bb2eed, type: 3}
+      propertyPath: battleField
+      value: 
+      objectReference: {fileID: 1023227234}
     - target: {fileID: 7173161062228694577, guid: d9489ff00d4887c45a14c21a49bb2eed, type: 3}
       propertyPath: DeckLayoutCenter
       value: 

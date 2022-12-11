@@ -47,13 +47,17 @@ public class Player : MonoBehaviour
             Graveyard.Add(cardA);
             Hand.Remove(cardA);
             Debug.Log($"弃置了{cardA}");
+            this.TriggerEvent(GameEvents.Discard, new PlayCard { player = this, card = cardA });
 
             Graveyard.Add(cardB);
             Hand.Remove(cardB);
             Debug.Log($"弃置了{cardB}");
+            this.TriggerEvent(GameEvents.Discard, new PlayCard { player = this, card = cardB });
 
             GameHelper.DrawCards(ref Deck, ref Hand, 1);
             Debug.Log($"抽到了{Hand.Last()}");
+            // 还需要补充抽牌事件
+
 
             this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
             return true;
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
         Hand.Remove(card);
         Debug.Log($"弃置了{card}");
 
+        this.TriggerEvent(GameEvents.Discard, new PlayCard { player = this, card = card });
         this.TriggerEvent(GameEvents.HandsChange, new HandsChangeEventArgs { currentPlayer = this });
         return true;
     }
