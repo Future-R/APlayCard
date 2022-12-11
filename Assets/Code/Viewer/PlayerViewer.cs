@@ -32,8 +32,8 @@ public class PlayerViewer : MonoBehaviour
     //public float circleLayoutLeftAngle = 105f;
     //public float circleLayoutRightAngle = 75f;
     public float circleLayoutRadius = 100f;
-    [Tooltip("阻力")]
-    public float damp = 20f;
+
+    public float moveSpeed = 1f;
     private Player player;
 
     void Start()
@@ -51,12 +51,12 @@ public class PlayerViewer : MonoBehaviour
         EventManager.Instance.RemoveListener(GameEvents.Discard, DiscardPerformance);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        float deltaTime = Time.fixedDeltaTime;
         foreach (CardMove m in battleField.cardObjectPool.Select(c => c.GetComponent<CardMove>()))
         {
-            m.GetComponent<RectTransform>().localPosition += (m.targetPosition - m.GetComponent<RectTransform>().localPosition) / damp;
+            m.GetComponent<RectTransform>().localPosition += (m.targetPosition - m.GetComponent<RectTransform>().localPosition) * deltaTime * moveSpeed;
         }
     }
 
