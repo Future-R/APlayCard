@@ -68,6 +68,8 @@ public class BattleField : MonoBehaviour
         Zone_Red.color = Card.CardColor.红;
         Zone_Green.color = Card.CardColor.绿;
         Zone_Blue.color = Card.CardColor.蓝;
+
+        // TODO：这里不应该直接清除，而应该根据持有者转移到墓地。转移后再清除（如果有无持有者的卡牌的话）
         Zone_Red.cards.Clear();
         Zone_Green.cards.Clear();
         Zone_Blue.cards.Clear();
