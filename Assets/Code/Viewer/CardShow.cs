@@ -36,16 +36,15 @@ public class CardShow : MonoBehaviour
 
     public void Hide()
     {
-        foreach (var item in new List<GameObject> { WhiteEdge, CardBack, BlackShadow, R, G, B, PointForward, PointBackward })
-        {
-            item.SetActive(false);
-        }
+        new List<GameObject> { WhiteEdge, CardBack, BlackShadow, R, G, B, PointForward, PointBackward }
+        .ForEach(obj => obj.SetActive(false));
     }
 
     public void TurnCover()
     {
         Hide();
         CardBack.SetActive(true);
+        BlackShadow.SetActive(true);
     }
 
     public void Show()
