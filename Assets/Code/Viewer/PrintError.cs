@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ErrorDisplay : MonoBehaviour
+
+public class PrintError : MonoBehaviour
 {
 
-    private Text errMsg;
+    public Text errMsg;
     private string logs;
 
-    private void Start()
-    {
-        errMsg = GetComponent<Text>();
-    }
 
     internal void OnEnable()
     {
@@ -22,7 +19,7 @@ public class ErrorDisplay : MonoBehaviour
     {
         Application.logMessageReceived -= HandleLog;
     }
-    
+
     /// <summary>
     ///
     /// </summary>
@@ -31,11 +28,26 @@ public class ErrorDisplay : MonoBehaviour
     /// <param name="type">错误类型</param>
     void HandleLog(string logString, string stackTrace, LogType type)
     {
-        if (type != LogType.Error) return;
+        switch (type)
+        {
+            case LogType.Error:
+                break;
+            case LogType.Assert:
+                break;
+            case LogType.Warning:
+                return;
+            case LogType.Log:
+                return;
+            case LogType.Exception:
+                break;
+            default:
+                break;
+        }
+
         logs += logString + "\n";
         errMsg.text = logs;
     }
-    
+
 
 }
 

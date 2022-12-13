@@ -31,6 +31,7 @@ public class GameHelper
     /// <summary>
     /// 从list里随机取一项<br />
     /// 建议在 <b>需要足够随机的地方</b> 使用这个方法代替Random.Range()
+    /// IL2CPP不支持dynamic，如果之后要打64位包（上TapPlay）的话得把这里重构……
     /// </summary>
     /// <param name="list"></param>
     /// <returns></returns>
